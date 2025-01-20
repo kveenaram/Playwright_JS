@@ -1,5 +1,5 @@
 /* Types of Drop Down
-1. Statis drop down - values wot change
+1. Static drop down - values wont change
 2. Dynamic drop down - values change
 practice site - https://practice.expandtesting.com/dropdown
 https://demoqa.com/select-menu
@@ -39,6 +39,31 @@ test ('dropdown developed usig select tag', async ({ page }) => {
     await page.waitForTimeout(5000);
     })
 
-    test ('dropdown developed usig non select tag', async ({ page }) => {
-        
+    test('dropdown developed usig non select tag', async ({ page }) => {
+        await page.goto('https://demoqa.com/select-menu');
+        // Select Value
+        await page.locator(".css-1hwfws3").nth(1).click()
+        await page.getByText("Mr.").click()
+        await page.waitForTimeout(2000)
+    })
+
+    test.only('select all the elements from MultiSelect DD using loop', async ({ page }) => {
+        await page.goto('https://demoqa.com/select-menu');
+
+        // Selecting Multiselect drop down
+        await page.locator('.css-1hwfws3').last().click()
+
+         // Get all the option elements inside the multiselect dropdown
+        const optionsCount = await page.locator(".css-11unzgr div").count();
+        console.log("Total Options Count:", optionsCount);
+
+        // Loop through all the options and select each one
+        for (let i = 0; i < optionsCount; i++) {
+        // Find the option by index and click it
+        const option = page.locator(`.css-11unzgr div:nth-child(${i + 1})`);
+        await option.click();
+        await page.waitForTimeout(1000);
+        console.log(`Selected option ${i + 1}`);
+    }
+        await page.waitForTimeout(1000);
     })
