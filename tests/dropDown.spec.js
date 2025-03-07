@@ -49,6 +49,7 @@ test ('dropdown developed usig select tag', async ({ page }) => {
 
     test.only('select all the elements from MultiSelect DD using loop', async ({ page }) => {
         await page.goto('https://demoqa.com/select-menu');
+        //await expect(page.getByText('Select Menu')).toBeVisible();
 
         // Selecting Multiselect drop down
         await page.locator('.css-1hwfws3').last().click()
@@ -58,12 +59,9 @@ test ('dropdown developed usig select tag', async ({ page }) => {
         console.log("Total Options Count:", optionsCount);
 
         // Loop through all the options and select each one
-        for (let i = 0; i < optionsCount; i++) {
-        // Find the option by index and click it
-        const option = page.locator(`.css-11unzgr div:nth-child(${i + 1})`);
-        await option.click();
-        await page.waitForTimeout(1000);
-        console.log(`Selected option ${i + 1}`);
-    }
-        await page.waitForTimeout(1000);
+        for (let i = optionsCount-1; i >= 0; i--) {
+            await page.waitForTimeout(1000);
+            const option = page.locator('.css-11unzgr div').nth(i).click()
+        }
+            await page.waitForTimeout(1000);
     })

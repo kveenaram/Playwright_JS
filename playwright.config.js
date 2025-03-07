@@ -32,7 +32,7 @@ module.exports = defineConfig({
     trace: 'on',
     screenshot : 'on',
     video :'on',
-    headless :false,
+    headless :true,
   },
 
   /* Configure projects for major browsers */
